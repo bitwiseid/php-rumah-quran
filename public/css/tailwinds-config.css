@@ -1,0 +1,11 @@
+:root {
+  --tw-primary: #3490dc; /* Your custom primary color */
+}
+
+.bg-primary {
+  background-color: var(--tw-primary);
+}
+
+.text-primary {
+  color: var(--tw-primary);
+}
