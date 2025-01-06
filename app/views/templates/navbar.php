@@ -1,4 +1,4 @@
-<div>
-    <div></div>
-    <nav></nav>
-</div>
+<?php
+
+require_once "topbar.php";
+require_once "sidebar.php";

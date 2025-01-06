@@ -1,38 +1,102 @@
 <?php
-
 class AdminApp
 {
     protected $controller = 'dashboard';
     protected $method = 'index';
     protected $params = [];
+    protected $routes = [];
+
 
     public function __construct()
     {
         $url = $this->parseURL();
-        if (isset($url[0]) && file_exists('../app/controllers/admin/' . $url[0] . '.php')) {
-            $this->controller = $url[0];
-            unset($url[0]);
-        }
-        if ($this->controller !== "login" && !isset($_SESSION['id'])) {
-            $this->controller = 'login';
-        }
-        if ($this->controller == "login" && isset($_SESSION['id'])) {
-            $this->controller = 'dashboard';
-        }
+        $routes = require_once __DIR__ . '/Routes.php';
+        $this->routes = $routes['admin'];
+        $this->route($url);
+    }
 
-        require_once '../app/controllers/admin/' . $this->controller . '.php';
-        $this->controller = new $this->controller;
-        if (isset($url[1])) {
-            if (method_exists($this->controller, $url[1])) {
-                $this->method = $url[1];
+    public function route($url)
+    {
+        if (!empty($url)) {
+            // get url [0] and [1]
+            $path = implode('/', array_slice($url, 0, 2));
+            if (array_key_exists($path, $this->routes)) {
+                $route = $this->routes[$path];
+                [$this->controller, $this->method] = explode('@', $route);
+                unset($url[0]);
                 unset($url[1]);
+            } else if (array_key_exists($url[0], $this->routes)) {
+                $route = $this->routes[$url[0]];
+                [$this->controller, $this->method] = explode('@', $route);
+                unset($url[0]);
             }
         }
-        if (!empty($url)) {
-            $this->params = array_values($url);
+
+        // if (!isset($_SESSION['level']) && $this->controller !== "login") {
+        //     $this->controller = 'login';
+        //     $this->method = 'index';
+        // } else if (isset($_SESSION['level']) && ($_SESSION['level'] !== "admin" && $_SESSION['level'] !== "superadmin") && $this->controller === "login") {
+        //     $this->controller = 'dashboard';
+        //     $this->method = 'index';
+        // }
+
+
+
+        // Normalize controller name (first letter uppercase)
+        $this->controller = ucfirst(strtolower($this->controller));
+
+        // Determine the base path dynamically
+        $basePath = realpath(dirname(__FILE__) . '/../..');
+
+        // Possible controller paths
+        $controllerPaths = [
+            $basePath . '/app/controllers/admin/' . $this->controller . '.php',
+            $basePath . '/app/controllers/admin/' . strtolower($this->controller) . '.php',
+            __DIR__ . '/../controllers/admin/' . $this->controller . '.php',
+            __DIR__ . '/../controllers/admin/' . strtolower($this->controller) . '.php'
+        ];
+
+        // Try multiple paths
+        $foundPath = false;
+        foreach ($controllerPaths as $path) {
+            if (file_exists($path)) {
+                $foundPath = $path;
+                break;
+            }
         }
-        call_user_func_array([$this->controller, $this->method], $this->params);
+
+        // Load the controller
+        if ($foundPath) {
+            require_once $foundPath;
+            $this->controller = new $this->controller;
+
+            if (!empty($url)) {
+                $this->params = array_values($url);
+            }
+
+            call_user_func_array([$this->controller, $this->method], $this->params);
+        } else {
+            // Detailed error logging
+            error_log('Controller not found: ' . $this->controller);
+            error_log('Attempted paths:');
+            foreach ($controllerPaths as $path) {
+                error_log($path);
+            }
+            die('Controller not found: ' . $this->controller);
+        }
+
+        // Session and default route logic
+        if (!isset($_SESSION['level']) && $this->controller !== "Login") {
+            $this->controller = 'Login';
+            $this->method = 'index';
+        }
+
+        if (!isset($this->method)) {
+            $this->controller = 'Dashboard';
+            $this->method = 'index';
+        }
     }
+
     public function parseURL()
     {
         if (isset($_GET['url'])) {
