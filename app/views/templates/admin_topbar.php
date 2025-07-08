@@ -47,7 +47,7 @@
                                     role="menuitem">Reset Password</a>
                             </li>
                             <li>
-                                <a class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-200"
+                                <a href=<?= BASEURL_ADMIN . '/logout' ?> class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-200"
                                     role="menuitem">Logout</a>
                             </li>
                         </ul>

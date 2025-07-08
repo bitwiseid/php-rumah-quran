@@ -45,6 +45,7 @@ class Controller
     {
         $minifiedSuffix = ENVIRONMENT === 'production' ? '.min' : '';
         $baseUrl = BASEURL;
+        $filename = ENVIRONMENT === 'production' ? 'min/' . $filename : 'origin/' . $filename;
 
         switch ($type) {
             case 'css':

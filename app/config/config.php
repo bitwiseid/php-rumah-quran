@@ -9,3 +9,6 @@ define('DB_USER', $DB_USER);
 define('DB_PASS', $DB_PASS);
 define('DB_NAME', $DB_NAME);
 
+define('ROLE_ADMIN', 'admin');
+define('ROLE_GURU', 'guru');
+define('ROLE_ORANGTUA', 'orang tua');

@@ -32,13 +32,13 @@ class AdminApp
             }
         }
 
-        // if (!isset($_SESSION['level']) && $this->controller !== "login") {
-        //     $this->controller = 'login';
-        //     $this->method = 'index';
-        // } else if (isset($_SESSION['level']) && ($_SESSION['level'] !== "admin" && $_SESSION['level'] !== "superadmin") && $this->controller === "login") {
-        //     $this->controller = 'dashboard';
-        //     $this->method = 'index';
-        // }
+        if (!isset($_SESSION['role']) && $this->controller !== "login") {
+            $this->controller = 'login';
+            $this->method = 'index';
+        } else if (isset($_SESSION['role']) && ($_SESSION['role'] !== "admin" && $_SESSION['role'] !== "superadmin") && $this->controller === "login") {
+            $this->controller = 'dashboard';
+            $this->method = 'index';
+        }
 
 
 
@@ -86,7 +86,7 @@ class AdminApp
         }
 
         // Session and default route logic
-        if (!isset($_SESSION['level']) && $this->controller !== "Login") {
+        if (!isset($_SESSION['role']) && $this->controller !== "Login") {
             $this->controller = 'Login';
             $this->method = 'index';
         }

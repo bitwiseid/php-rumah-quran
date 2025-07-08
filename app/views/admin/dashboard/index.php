@@ -15,7 +15,7 @@
                 </div>
             </div>
             <h3 class="text-center text-3xl font-bold text-blue-900">
-                43
+                <?= $data['TotalUser'] ?>
             </h3>
         </a>
         <a href="#" class="block max-w-sm p-3 bg-white border border-gray-200 rounded-lg shadow-xl hover:bg-gray-100">
@@ -33,7 +33,7 @@
                 </div>
             </div>
             <h3 class="text-center text-3xl font-bold text-blue-900">
-                43
+                <?= $data['TotalSantri'] ?>
             </h3>
         </a>
         <a href="#" class="block max-w-sm p-3 bg-white border border-gray-200 rounded-lg shadow-xl hover:bg-gray-100">
@@ -51,7 +51,7 @@
                 </div>
             </div>
             <h3 class="text-center text-3xl font-bold text-blue-900">
-                43
+                <?= $data['TotalGuru'] ?>
             </h3>
         </a>
 
@@ -179,6 +179,26 @@
                             </svg>
                         </span>
                     </th>
+                    <th class="p-3">
+                        <span class="flex items-center">
+                            aktifitas
+                            <svg class="w-4 h-4 ml-1" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24"
+                                height="24" fill="none" viewBox="0 0 24 24">
+                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                    stroke-width="2" d="m8 15 4 4 4-4m0-6-4-4-4 4" />
+                            </svg>
+                        </span>
+                    </th>
+                    <th class="p-3">
+                        <span class="flex items-center">
+                            aktifitas
+                            <svg class="w-4 h-4 ml-1" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24"
+                                height="24" fill="none" viewBox="0 0 24 24">
+                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                    stroke-width="2" d="m8 15 4 4 4-4m0-6-4-4-4 4" />
+                            </svg>
+                        </span>
+                    </th>
                 </tr>
             </thead>
             <tbody class="rounded-b-lg">
@@ -187,12 +207,16 @@
                     <td class="p-3">p</td>
                     <td class="p-3">p</td>
                     <td class="p-3">p</td>
+                    <td class="p-3">p</td>
+                    <td class="p-3">p</td>
                 </tr>
                 <tr class="hover:bg-blue-100 cursor-pointer text-gray-700">
                     <td class="p-3">a</td>
                     <td class="p-3">a</td>
                     <td class="p-3">a</td>
                     <td class="p-3">a</td>
+                    <td class="p-3">p</td>
+                    <td class="p-3">p</td>
                 </tr>
             </tbody>
         </table>

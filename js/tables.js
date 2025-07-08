@@ -13,7 +13,7 @@ if (
   });
 }
 
-// validasi radio tambah kategori
+// validasi radio tambah santri
 function validateForm() {
   const statusRadios = document.getElementsByName("showInMenu");
   let isStatusSelected = false;
@@ -39,14 +39,38 @@ document.querySelector("form").addEventListener("submit", function (event) {
   }
 });
 
-let selectedCategory = ""; // Variabel untuk menyimpan kategori yang dipilih
+let selectedSantri = ""; // Variabel untuk menyimpan santri yang dipilih
 
-// Fungsi untuk memilih kategori
-function selectCategory(id, name) {
-  selectedCategory = category; // Simpan kategori yang dipilih
-  document.getElementById("selected-category").innerText = name; // Update tampilan dropdown
-  document.getElementById("category").value = id;
+// Fungsi untuk memilih Santri
+function selectSantri(id, nama) {
+  selectedSantri = santri; // Simpan santri yang dipilih
+  document.getElementById("selected-santri").innerText = nama; // Update tampilan dropdown
+  document.getElementById("santri").value = id;
   closeDropdown(); // Tutup dropdown setelah memilih
+}
+
+let selectedOrangTua = "";
+// Fungsi untuk memilih orang tua
+function selectOrangTua(id_user, nama) {
+  selectedOrangTua = orang_tua; // Simpan orang tua yang dipilih
+  document.getElementById("selected-orang_tua").innerText = nama; // Update tampilan dropdown
+  document.getElementById("orang_tua").value = id_user;
+  closeDropdown(); // Tutup dropdown setelah memilih
+}
+
+function selectSantri(id_user, nama) {
+    document.getElementById('santri').value = id_user;
+    document.getElementById('selected-santri').innerText = nama;
+}
+
+function selectOrangTua(id_orang_tua, nama) {
+    document.getElementById('orang_tua').value = id_orang_tua;
+    document.getElementById('selected-orang_tua').innerText = nama;
+}
+
+function selectGuru(id_user, nama) {
+    document.getElementById('guru').value = id_user;
+    document.getElementById('selected-guru').innerText = nama;
 }
 
 // Fungsi untuk menutup dropdown

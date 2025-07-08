@@ -1,16 +1,16 @@
 <div class="flex justify-center items-center h-full min-h-screen p-4 bg-cover bg-center"
     style="background-image: url('<?= BASEURL ?>/favicon/islamic.png');">
     <div class="max-w-md w-full mx-auto">
-        <form class="bg-opacity-80 bg-white rounded-2xl p-6 shadow-2xl">
+        <form action="<?= BASEURL_ADMIN ?>/login/autentikasi" method="POST" class="bg-opacity-80 bg-white rounded-2xl p-6 shadow-2xl">
 
             <div class="text-center">
-                <h3 class="text-gray-800 text-3xl font-extrabold">Login</h3>
+                <h3 class="text-blue-900 text-3xl font-extrabold">Login</h3>
                 <img class="h-44 mx-auto mt-4" src="<?= BASEURL ?>/favicon/logo.png" alt="Logo">
             </div>
 
             <div class="mt-6">
                 <div class="relative flex items-center">
-                    <input name="username" type="text" required
+                    <input name="username" id="username" type="text" required
                         class="w-full p-2 border border-gray-300 rounded-2xl outline-none shadow-inner"
                         placeholder="Enter username">
                     <svg class="w-6 h-6 text-gray-800 absolute right-2 top-1/2 transform -translate-y-1/2"
@@ -24,7 +24,7 @@
 
             <div class="mt-6">
                 <div class="relative flex items-center">
-                    <input name="password" type="password" required
+                    <input name="password" id="password" type="password" required
                         class="w-full p-2 border border-gray-300 rounded-2xl outline-none shadow-inner"
                         placeholder="Enter password">
                     <svg class="w-6 h-6 text-gray-800 absolute right-2 top-1/2 transform -translate-y-1/2"
@@ -45,8 +45,8 @@
             </div>
 
             <div class="mt-12">
-                <button type="button"
-                    class="w-full py-2.5 px-4 text-sm font-semibold rounded-full text-white bg-gray-800 hover:bg-[#222] focus:outline-none">
+                <button type="submit"
+                    class="w-full py-2.5 px-4 text-sm font-semibold rounded-full text-white bg-blue-900 hover:bg-blue-950 focus:outline-none">
                     Sign in
                 </button>
                 <p class="text-gray-800 text-sm text-center mt-6">Don't have an account?
