@@ -211,7 +211,7 @@
                                     </a>
                                 </li>
                                 <li>
-                                    <a id="Orang_tua" href="#" class="flex items-center px-4 py-2 hover:bg-gray-100"
+                                    <a id="orang tua" href="#" class="flex items-center px-4 py-2 hover:bg-gray-100"
                                         onclick="selectRole(this, 'Orang Tua')">
                                         <span>Orang Tua</span>
                                     </a>
