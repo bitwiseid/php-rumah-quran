@@ -21,6 +21,7 @@ class Orang_tua_model extends Model
                     JOIN user AS user_orang_tua ON orang_tua.id_user = user_orang_tua.id_user 
                     LEFT JOIN santri ON santri.id_orang_tua = orang_tua.id_orang_tua 
                     LEFT JOIN user AS user_santri ON santri.id_user = user_santri.id_user 
+                    LEFT JOIN user ON orang_tua.id_user = user.id_user
                     WHERE user_orang_tua.role = 'orang tua'");
 
         return $this->db->resultSet();

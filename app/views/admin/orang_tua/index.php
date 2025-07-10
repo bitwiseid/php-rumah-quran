@@ -99,13 +99,17 @@
                         <tr class="hover:bg-blue-100 cursor-pointer text-gray-700">
                             <td class="p-3"><?= $no++ ?></td>
                             <td class="p-3"><?= $orang_tua['nama_orang_tua'] ?></td>
-                            <td class="p-3"><?= $orang_tua['nama_anak'] ?></td>
+                            <td class="p-3">
+                                <?php foreach ($orang_tua['santri'] as $santri) {
+                                    echo $santri . ', ';
+                                } ?>
+                            </td>
                             <td class="p-3"><?= $orang_tua['alamat'] ?></td>
                             <td class="p-3"><?= $orang_tua['role'] ?></td>
                             <td class="p-3">
                                 <div class="flex space-x-2">
                                     <!-- Tombol Edit -->
-                                    <button onclick="editOrangTua('<?= $orang_tua['id_orang_tua'] ?>', '<?= $orang_tua['id_user'] ?>', '<?= addslashes($orang_tua['nama_orang_tua']) ?>')"
+                                    <!-- <button onclick="editOrangTua('<?= $orang_tua['id_orang_tua'] ?>', '<?= $orang_tua['id_user'] ?>', '<?= addslashes($orang_tua['nama_orang_tua']) ?>')"
                                         data-modal-target="crud-modal" data-modal-toggle="crud-modal"
                                         class="text-white bg-blue-600 hover:bg-blue-700 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm p-2">
                                         <svg class="w-4 h-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
@@ -117,7 +121,7 @@
                                                 d="M19.846 4.318a2.148 2.148 0 0 0-.437-.692 2.014 2.014 0 0 0-.654-.463 1.92 1.92 0 0 0-1.544 0 2.014 2.014 0 0 0-.654.463l-.546.578 2.852 3.02.546-.579a2.14 2.14 0 0 0 .437-.692 2.244 2.244 0 0 0 0-1.635ZM17.45 8.721 14.597 5.7 9.82 10.76a.54.54 0 0 0-.137.27l-.536 2.84c-.07.37.239.696.588.622l2.682-.567a.492.492 0 0 0 .255-.145l4.778-5.06Z"
                                                 clip-rule="evenodd" />
                                         </svg>
-                                    </button>
+                                    </button> -->
                                     <!-- Tombol Hapus -->
                                     <button
                                         class="text-white bg-red-600 hover:bg-red-700 focus:ring-4 focus:outline-none focus:ring-red-300 rounded-lg text-sm p-2"
