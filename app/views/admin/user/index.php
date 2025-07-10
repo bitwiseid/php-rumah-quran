@@ -265,16 +265,5 @@
         document.getElementById('selected-role').innerHTML = role;
         document.getElementById('alamat').value = alamat;
         document.getElementById('kontak').value = kontak;
-        document.getElementById('add-btn').addEventListener('click', function() {
-            document.getElementById('modalLabel').innerText = 'Tambah User';
-            document.getElementById('form').reset();
-            document.getElementById('id').value = '';
-        });
-    }
-
-    function selectRole(element, role) {
-        document.getElementById('role').value = element.getAttribute('id');
-        document.getElementById('selected-role').innerHTML = role;
-        closeDropdown();
     }
 </script>

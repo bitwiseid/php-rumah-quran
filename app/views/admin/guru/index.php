@@ -143,7 +143,7 @@
     <div class="relative w-full max-w-4xl max-h-full">
         <div class="relative bg-white rounded-lg shadow-lg">
             <div class="flex items-center justify-between p-4 border-b rounded-t">
-                <h3 id="modalLabel" class="text-lg font-semibold">Tambah Produk</h3>
+                <h3 id="modalLabel" class="text-lg font-semibold">Tambah Data Guru</h3>
                 <button type="button"
                     class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8"
                     data-modal-toggle="crud-modal">
@@ -202,12 +202,8 @@
         document.getElementById('guru').value = id_user;
         document.getElementById('selected-guru').innerText = nama_guru;
 
-        // Reset listener (opsional)
-        document.getElementById('add-btn')?.addEventListener('click', function() {
-            document.getElementById('modalLabel').innerText = 'Tambah Data Guru';
-            document.getElementById('form').reset();
-            document.getElementById('id').value = '';
-            document.getElementById('selected-guru').innerText = 'Pilih Guru';
-        });
+        // Tutup dropdown setelah dipilih
+        const dropdown = document.getElementById('dropdown-guru');
+        dropdown.classList.add('hidden');
     }
 </script>

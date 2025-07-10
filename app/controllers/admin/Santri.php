@@ -18,6 +18,10 @@ class Santri extends Controller
 
     public function createUpdateSantri()
     {
+        // echo '<pre>';
+        // var_dump($_POST); // Tampilkan semua data POST
+        // echo '</pre>';
+        // exit;
 
         $issetId = isset($_POST['id']) && $_POST['id'] !== "";
 

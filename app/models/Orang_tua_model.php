@@ -28,13 +28,27 @@ class Orang_tua_model extends Model
 
     public function createOrangTua($data)
     {
-        $query = "INSERT INTO orang_tua (id_user) VALUES (:id_user)";
-        $this->db->query($query);
-        $this->db->bind('id_user', $data['orang_tua']); // ini dari <input hidden> id="orang_tua"
-        $this->db->execute();
+        try {
+            // Cek apakah id_user sudah digunakan di tabel orang_tua
+            $this->db->query("SELECT id_orang_tua FROM orang_tua WHERE id_user = :id_user");
+            $this->db->bind('id_user', $data['orang_tua']);
+            if ($this->db->single()) {
+                return 0; // Gagal karena id_user sudah digunakan sebagai orang tua
+            }
 
-        return $this->db->rowCount();
+            // Jika belum ada, insert
+            $query = "INSERT INTO orang_tua (id_user) VALUES (:id_user)";
+            $this->db->query($query);
+            $this->db->bind('id_user', $data['orang_tua']);
+            $this->db->execute();
+
+            return $this->db->rowCount();
+        } catch (PDOException $e) {
+            error_log("Gagal insert orang_tua: " . $e->getMessage());
+            return 0;
+        }
     }
+
 
     public function editOrangTua($data)
     {

@@ -87,13 +87,13 @@ class User_model extends Model
     public function getNamaOrangTua()
     {
         $this->db->query("SELECT 
-                        orang_tua.id_orang_tua,
-                        user.nama 
-                      FROM orang_tua
-                      JOIN user ON orang_tua.id_user = user.id_user
-                      WHERE user.role = 'orang tua'");
+                        id_user AS id_orang_tua,
+                        nama 
+                      FROM user 
+                      WHERE role = 'orang tua'");
         return $this->db->resultSet();
     }
+
 
 
     public function getNamaSantri()

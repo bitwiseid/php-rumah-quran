@@ -44,7 +44,15 @@
                                 </svg>
                             </span></th>
                         <th class="p-3"><span class="flex items-center">
-                                Nama
+                                Santri
+                                <svg class="w-4 h-4 ml-1" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
+                                    width="24" height="24" fill="none" viewBox="0 0 24 24">
+                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                        stroke-width="2" d="m8 15 4 4 4-4m0-6-4-4-4 4" />
+                                </svg>
+                            </span></th>
+                        <th class="p-3"><span class="flex items-center">
+                                Nama Orang Tua
                                 <svg class="w-4 h-4 ml-1" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
                                     width="24" height="24" fill="none" viewBox="0 0 24 24">
                                     <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
@@ -99,6 +107,7 @@
                         <tr class="hover:bg-blue-100 cursor-pointer text-gray-700">
                             <td class="p-3"><?= $no++ ?></td>
                             <td class="p-3"><?= $santri['nama_santri'] ?></td>
+                            <td class="p-3"><?= $santri['nama_orang_tua'] ?></td>
                             <td class="p-3"><?= $santri['alamat'] ?></td>
                             <td class="p-3"><?= $santri['role'] ?></td>
                             <td class="p-3"><?= $santri['login_at'] ?></td>
@@ -235,13 +244,5 @@
         document.getElementById('orang_tua').value = id_orang_tua;
         document.getElementById('selected-santri').innerText = nama_santri;
         document.getElementById('selected-orang_tua').innerText = nama_orang_tua;
-
-        // Reset listener (opsional)
-        document.getElementById('add-btn')?.addEventListener('click', function() {
-            document.getElementById('modalLabel').innerText = 'Tambah Data Orang Tua';
-            document.getElementById('form').reset();
-            document.getElementById('id').value = '';
-            document.getElementById('selected-orang_tua').innerText = 'Pilih Orang Tua';
-        });
     }
 </script>

@@ -34,16 +34,40 @@ class Santri_model extends Model
 
     public function createSantri($data)
     {
+        try {
+            // Ambil id_orang_tua berdasarkan id_user yang dikirim
+            $this->db->query("SELECT id_orang_tua FROM orang_tua WHERE id_user = :id_user");
+            $this->db->bind('id_user', $data['orang_tua']); // 'orang_tua' dari form = id_user
+            $ortu = $this->db->single();
 
-        // Masukkan data ke tabel santri
-        $this->db->query("INSERT INTO santri (id_user, id_orang_tua) VALUES (:id_user, :id_orang_tua)");
-        $this->db->bind('id_user', $data['santri']);
-        $this->db->bind('id_orang_tua', $data['orang_tua']);
+            if (!$ortu) {
+                error_log("Orang tua tidak ditemukan untuk id_user: " . $data['orang_tua']);
+                return 0;
+            }
 
+            $id_orang_tua = $ortu['id_orang_tua'];
 
-        $this->db->execute();
-        return $this->db->rowCount();
+            // Cek apakah santri sudah ada
+            $this->db->query("SELECT id_santri FROM santri WHERE id_user = :id_user");
+            $this->db->bind('id_user', $data['santri']);
+            if ($this->db->single()) {
+                return 0; // Santri sudah pernah dimasukkan
+            }
+
+            // Insert data ke tabel santri
+            $this->db->query("INSERT INTO santri (id_user, id_orang_tua) VALUES (:id_user, :id_orang_tua)");
+            $this->db->bind('id_user', $data['santri']);
+            $this->db->bind('id_orang_tua', $id_orang_tua);
+            $this->db->execute();
+
+            return $this->db->rowCount();
+        } catch (PDOException $e) {
+            error_log("Insert Santri Gagal: " . $e->getMessage());
+            return 0;
+        }
     }
+
+
 
     public function editSantri($data)
     {

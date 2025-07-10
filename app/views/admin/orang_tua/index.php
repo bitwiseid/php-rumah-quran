@@ -44,7 +44,7 @@
                                 </svg>
                             </span></th>
                         <th class="p-3"><span class="flex items-center">
-                                Nama
+                                Nama Orang Tua
                                 <svg class="w-4 h-4 ml-1" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
                                     width="24" height="24" fill="none" viewBox="0 0 24 24">
                                     <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
@@ -176,7 +176,7 @@
                                 <?php foreach ($data['user'] as $nama_orang_tua): ?>
                                     <li>
                                         <a href="#" class="block px-4 py-2 hover:bg-gray-100"
-                                            onclick="selectOrangTua('<?= htmlspecialchars($nama_orang_tua['id_user']) ?>', '<?= htmlspecialchars($nama_orang_tua['nama']) ?>' )">
+                                            onclick="selectOrangTua('<?= htmlspecialchars($nama_orang_tua['id_orang_tua']) ?>', '<?= htmlspecialchars($nama_orang_tua['nama']) ?>' )">
                                             <?= htmlspecialchars($nama_orang_tua['nama']) ?>
                                         </a>
                                     </li>
@@ -200,13 +200,5 @@
         document.getElementById('id').value = id_orang_tua;
         document.getElementById('orang_tua').value = id_user;
         document.getElementById('selected-orang_tua').innerText = nama_orang_tua;
-
-        // Reset listener (opsional)
-        document.getElementById('add-btn')?.addEventListener('click', function() {
-            document.getElementById('modalLabel').innerText = 'Tambah Data Orang Tua';
-            document.getElementById('form').reset();
-            document.getElementById('id').value = '';
-            document.getElementById('selected-orang_tua').innerText = 'Pilih Orang Tua';
-        });
     }
 </script>
