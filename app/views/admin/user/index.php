@@ -135,7 +135,7 @@
     <div class="relative w-full max-w-4xl max-h-full">
         <div class="relative bg-white rounded-lg shadow-lg">
             <div class="flex items-center justify-between p-4 border-b rounded-t">
-                <h3 id="modalLabel" class="text-lg font-semibold">Tambah User</h3>
+                <h3 id="modalLabelUser" class="text-lg font-semibold">Tambah User</h3>
                 <button type="button"
                     class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8"
                     data-modal-toggle="crud-modal">
@@ -196,7 +196,7 @@
                             </svg>
                         </button>
                         <div id="dropdown"
-                            class="z-10 hidden bg-white divide-y divide-gray-100 rounded-lg shadow-xl w-96">
+                            class="z-10 hidden bg-white divide-y divide-gray-100 rounded-lg shadow-xl w-[850px] ">
                             <ul class="py-2 text-sm text-gray-700" aria-labelledby="dropdownDefaultButton">
                                 <li>
                                     <a id="guru" href="#" class="flex items-center px-4 py-2 hover:bg-gray-100"
@@ -254,7 +254,7 @@
 
 <script>
     function editUser(id, username, email, password, nama, role, alamat, kontak) {
-        $("#modalLabel").html("Ubah Data User");
+        $("#modalLabelUser").html("Ubah Data User");
         document.getElementById('id').value = id;
         document.getElementById('username').value = username;
         document.getElementById('email').value = email;

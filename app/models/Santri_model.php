@@ -16,8 +16,8 @@ class Santri_model extends Model
                         user_ortu.nama AS nama_orang_tua
                       FROM santri
                       JOIN user AS user_santri ON santri.id_user = user_santri.id_user
-                      JOIN orang_tua ON santri.id_orang_tua = orang_tua.id_orang_tua
-                      JOIN user AS user_ortu ON orang_tua.id_user = user_ortu.id_user
+                      LEFT JOIN orang_tua ON santri.id_orang_tua = orang_tua.id_orang_tua
+                      LEFT JOIN user AS user_ortu ON orang_tua.id_user = user_ortu.id_user
                       WHERE user_santri.role = 'santri'");
 
         return $this->db->resultSet();
@@ -72,17 +72,20 @@ class Santri_model extends Model
     public function editSantri($data)
     {
         $query = "UPDATE santri  
-              SET id_user = :id_user, 
-                  id_orang_tua = :id_orang_tua 
+              SET id_orang_tua = :id_orang_tua 
               WHERE id_santri = :id_santri";
 
         $this->db->query($query);
-        $this->db->bind('id_user', $data['santri']);         // id_user santri
-        $this->db->bind('id_orang_tua', $data['orang_tua']); // id_orang_tua
-        $this->db->bind('id_santri', $data['id']);           // id_santri (hidden input dari form)
+        $this->db->bind('id_orang_tua', $data['orang_tua']); // id_orang_tua yang baru dipilih
+        $this->db->bind('id_santri', $data['id']);           // id_santri (dari input hidden)
 
-        $this->db->execute();
-        return $this->db->rowCount();
+        try {
+            $this->db->execute();
+            return $this->db->rowCount();
+        } catch (PDOException $e) {
+            error_log("Edit santri gagal: " . $e->getMessage());
+            return 0;
+        }
     }
 
 

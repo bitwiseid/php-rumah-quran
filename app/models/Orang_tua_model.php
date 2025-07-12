@@ -72,4 +72,18 @@ class Orang_tua_model extends Model
         $this->db->execute();
         return $this->db->rowCount();
     }
+
+    public function getNamaOrang_tua()
+    {
+        $this->db->query("SELECT 
+                        orang_tua.id_orang_tua,
+                        user_orang_tua.id_user,
+                        user_orang_tua.nama AS nama_orang_tua
+                    FROM orang_tua
+                    JOIN user AS user_orang_tua ON orang_tua.id_user = user_orang_tua.id_user
+                    WHERE user_orang_tua.role = 'orang tua'
+                    GROUP BY orang_tua.id_orang_tua, user_orang_tua.id_user, user_orang_tua.nama");
+
+        return $this->db->resultSet();
+    }
 }

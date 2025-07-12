@@ -17,19 +17,6 @@
                     placeholder="Search..." id="dataTableSearch">
             </div>
 
-            <!-- Button Tambah -->
-            <div class="button-container">
-                <button data-modal-target="crud-modal" data-modal-toggle="crud-modal" id="add-btn"
-                    class="flex items-center gap-2 text-white bg-blue-600 hover:bg-blue-700 focus:ring-4 focus:outline-none focus:ring-gray-300 font-medium rounded-lg text-sm px-4 py-2">
-                    <svg class="w-4 h-4 text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24"
-                        height="24" fill="currentColor" viewBox="0 0 24 24">
-                        <path fill-rule="evenodd"
-                            d="M2 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10S2 17.523 2 12Zm11-4.243a1 1 0 1 0-2 0V11H7.757a1 1 0 1 0 0 2H11v3.243a1 1 0 1 0 2 0V13h3.243a1 1 0 1 0 0-2H13V7.757Z"
-                            clip-rule="evenodd" />
-                    </svg>
-                    <span>Tambah</span>
-                </button>
-            </div>
         </div>
         <div class="p-5 bg-white shadow-lg rounded-lg">
             <table class="w-full border-collapse bg-white shadow-lg rounded-lg" id="admin-table">
@@ -114,7 +101,7 @@
                             <td class="p-3">
                                 <div class="flex space-x-2">
                                     <!-- Tombol Edit -->
-                                    <button onclick="editSantri('<?= $santri['id_santri'] ?>', '<?= $santri['id_user'] ?>', '<?= $santri['id_orang_tua'] ?>', '<?= addslashes($santri['nama_santri']) ?>', '<?= addslashes($santri['nama_orang_tua']) ?>')"
+                                    <button onclick="editSantri('<?= $santri['id_santri'] ?>','<?= $santri['id_orang_tua'] ?>','<?= addslashes($santri['nama_orang_tua']) ?>')"
                                         data-modal-target="crud-modal" data-modal-toggle="crud-modal"
                                         class="text-white bg-blue-600 hover:bg-blue-700 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm p-2">
                                         <svg class="w-4 h-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
@@ -124,16 +111,6 @@
                                                 clip-rule="evenodd" />
                                             <path fill-rule="evenodd"
                                                 d="M19.846 4.318a2.148 2.148 0 0 0-.437-.692 2.014 2.014 0 0 0-.654-.463 1.92 1.92 0 0 0-1.544 0 2.014 2.014 0 0 0-.654.463l-.546.578 2.852 3.02.546-.579a2.14 2.14 0 0 0 .437-.692 2.244 2.244 0 0 0 0-1.635ZM17.45 8.721 14.597 5.7 9.82 10.76a.54.54 0 0 0-.137.27l-.536 2.84c-.07.37.239.696.588.622l2.682-.567a.492.492 0 0 0 .255-.145l4.778-5.06Z"
-                                                clip-rule="evenodd" />
-                                        </svg>
-                                    </button>
-                                    <!-- Tombol Hapus -->
-                                    <button class="text-white bg-red-600 hover:bg-red-700 focus:ring-4 focus:outline-none focus:ring-red-300 rounded-lg text-sm p-2"
-                                        onclick="confirmDelete('santri/delete', <?= $santri['id_santri'] ?>)">
-                                        <svg class="w-4 h-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
-                                            fill="currentColor" viewBox="0 0 24 24">
-                                            <path fill-rule="evenodd"
-                                                d="M8.586 2.586A2 2 0 0 1 10 2h4a2 2 0 0 1 2 2v2h3a1 1 0 1 1 0 2v12a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V8a1 1 0 0 1 0-2h3V4a2 2 0 0 1 .586-1.414ZM10 6h4V4h-4v2Zm1 4a1 1 0 1 0-2 0v8a1 1 0 1 0 2 0v-8Zm4 0a1 1 0 1 0-2 0v8a1 1 0 1 0 2 0v-8Z"
                                                 clip-rule="evenodd" />
                                         </svg>
                                     </button>
@@ -152,7 +129,7 @@
     <div class="relative w-full max-w-4xl max-h-full">
         <div class="relative bg-white rounded-lg shadow-lg">
             <div class="flex items-center justify-between p-4 border-b rounded-t">
-                <h3 id="modalLabel" class="text-lg font-semibold">Tambah Data Santri</h3>
+                <h3 id="modalLabelSantri" class="text-lg font-semibold">Tambah Data Santri</h3>
                 <button type="button"
                     class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8"
                     data-modal-toggle="crud-modal">
@@ -162,38 +139,6 @@
             <div class="modal-body">
                 <form action="<?= BASEURL_ADMIN ?>/santri/quran" method="POST" id="form" class="p-6">
                     <input type="hidden" name="id" id="id">
-
-                    <!-- santri -->
-                    <div class="mb-4">
-                        <label for="santri" class="block mb-2 text-sm font-medium">Nama Santri</label>
-                        <button id="dropdownSantriButton" data-dropdown-toggle="dropdown-santri"
-                            class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full p-3 h-12 flex items-center justify-between"
-                            type="button">
-                            <span id="selected-santri">Pilih Santri</span>
-                            <svg class="w-2.5 h-2.5 ms-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
-                                fill="none" viewBox="0 0 10 6">
-                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
-                                    stroke-width="2" d="m1 1 4 4 4-4" />
-                            </svg>
-                        </button>
-                        <input type="hidden" name="santri" id="santri">
-
-                        <div id="dropdown-santri"
-                            class="z-10 hidden bg-white divide-y divide-gray-100 rounded-lg shadow w-44">
-                            <ul class="py-2 text-sm text-gray-700" aria-labelledby="dropdownSantriButton">
-                                <?php foreach ($data['santri_user'] as $nama_santri): ?>
-                                    <li>
-                                        <a href="#" class="block px-4 py-2 hover:bg-gray-100"
-                                            onclick="selectSantri('<?= $nama_santri['id_user'] ?>', '<?= $nama_santri['nama'] ?>')">
-                                            <?= $nama_santri['nama'] ?>
-                                        </a>
-                                    </li>
-                                <?php endforeach; ?>
-
-                            </ul>
-                        </div>
-                    </div>
-
                     <!-- orang tua -->
                     <div class="mb-4">
                         <label for="orang_tua" class="block mb-2 text-sm font-medium">Nama Orang Tua</label>
@@ -210,13 +155,13 @@
                         <input type="hidden" name="orang_tua" id="orang_tua">
 
                         <div id="dropdown"
-                            class="z-10 hidden bg-white divide-y divide-gray-100 rounded-lg shadow w-44">
+                            class="z-10 hidden bg-white divide-y divide-gray-100 rounded-lg shadow w-[850px] ">
                             <ul class="py-2 text-sm text-gray-700" aria-labelledby="dropdownOrangTuaButton">
                                 <?php foreach ($data['orang_tua'] as $nama_orang_tua): ?>
                                     <li>
                                         <a href="#" class="block px-4 py-2 hover:bg-gray-100"
-                                            onclick="selectOrangTua('<?= $nama_orang_tua['id_orang_tua'] ?>', '<?= $nama_orang_tua['nama'] ?>')">
-                                            <?= htmlspecialchars($nama_orang_tua['nama']) ?>
+                                            onclick="selectOrangTua('<?= $nama_orang_tua['id_orang_tua'] ?>', '<?= $nama_orang_tua['nama_orang_tua'] ?>')">
+                                            <?= htmlspecialchars($nama_orang_tua['nama_orang_tua']) ?>
                                         </a>
                                     </li>
                                 <?php endforeach; ?>
@@ -237,12 +182,16 @@
 </div>
 
 <script>
-    function editSantri(id_santri, id_user, id_orang_tua, nama_santri, nama_orang_tua) {
-        document.getElementById('modalLabel').innerText = 'Ubah Data Santri';
+    function editSantri(id_santri, id_orang_tua, nama_orang_tua) {
+        document.getElementById('modalLabelSantri').innerText = 'Ubah Orang Tua';
         document.getElementById('id').value = id_santri;
-        document.getElementById('santri').value = id_user;
-        document.getElementById('orang_tua').value = id_orang_tua;
-        document.getElementById('selected-santri').innerText = nama_santri;
-        document.getElementById('selected-orang_tua').innerText = nama_orang_tua;
+        // Cek apakah id_orang_tua atau nama_orang_tua kosong/null
+        if (!id_orang_tua || !nama_orang_tua || nama_orang_tua === 'null') {
+            document.getElementById('orang_tua').value = '';
+            document.getElementById('selected-orang_tua').innerText = 'Pilih Orang Tua';
+        } else {
+            document.getElementById('orang_tua').value = id_orang_tua;
+            document.getElementById('selected-orang_tua').innerText = nama_orang_tua;
+        }
     }
 </script>

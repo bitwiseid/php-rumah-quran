@@ -4,8 +4,8 @@ class Santri extends Controller
 {
     public function index()
     {
-        $data['santri_user'] = $this->model('User_model')->getNamaSantri();       // user santri
-        $data['orang_tua'] = $this->model('User_model')->getNamaOrangTua(); // ambil id_orang_tua dan nama
+        $data['santri_user'] = $this->model('User_model')->getNamaSantri();
+        $data['orang_tua'] = $this->model('Orang_tua_model')->getNamaOrang_tua();
         $data['santri'] = $this->model('Santri_model')->getSantri();
 
         $header['title'] = 'Santri';
@@ -18,11 +18,6 @@ class Santri extends Controller
 
     public function createUpdateSantri()
     {
-        // echo '<pre>';
-        // var_dump($_POST); // Tampilkan semua data POST
-        // echo '</pre>';
-        // exit;
-
         $issetId = isset($_POST['id']) && $_POST['id'] !== "";
 
         $isSuccess = ($issetId ? $this->model('Santri_model')->editSantri($_POST) : $this->model('Santri_model')->createSantri($_POST)) > 0;

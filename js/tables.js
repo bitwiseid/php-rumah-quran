@@ -39,73 +39,29 @@ document.querySelector("form").addEventListener("submit", function (event) {
   }
 });
 
-let selectedSantri = ""; // Variabel untuk menyimpan santri yang dipilih
-
-// BAGIAN MENU SANTRI TAMBAH SANTRI
-// Fungsi untuk memilih Santri
-function selectSantri(id, nama) {
-  selectedSantri = santri; // Simpan santri yang dipilih
-  document.getElementById("selected-santri").innerText = nama; // Update tampilan dropdown
-  document.getElementById("santri").value = id;
-  const dropdownSantri = document.getElementById('dropdown-santri');
-  dropdownSantri.classList.add('hidden');
-}
-document.getElementById('add-btn')?.addEventListener('click', function() {
-  document.getElementById('modalLabel').innerText = 'Tambah Data Santri';
-  document.getElementById('form').reset();
-  document.getElementById('id').value = '';
-  document.getElementById('selected-santri').innerText = 'Pilih Santri';
-  });
 
 let selectedOrangTua = "";
 // Fungsi untuk memilih orang tua 
-function selectOrangTua(id_user, nama) {
-  selectedOrangTua = orang_tua; // Simpan orang tua yang dipilih
-  document.getElementById("selected-orang_tua").innerText = nama; // Update tampilan dropdown
-  document.getElementById("orang_tua").value = id_user;
-  closeDropdown(); // Tutup dropdown setelah memilih
+function selectOrangTua(id_orang_tua, nama) {
+    document.getElementById("selected-orang_tua").innerText = nama || 'Pilih Orang Tua'; // Tampilkan nama atau default
+    document.getElementById("orang_tua").value = id_orang_tua || ''; // Set nilai hidden input
+    closeDropdown(); // Tutup dropdown (jika ada fungsi closeDropdown)
 }
 //SAMPAI SINI BAGIAN TAMBAH SANTRI
 
-//INI BAGIAN MENU SANTRI TAMBAH SANTRI
+//INI BAGIAN MENU USER TAMBAH SANTRI
 function selectRole(element, role) {
   document.getElementById('role').value = element.getAttribute('id');
   document.getElementById('selected-role').innerHTML = role;
   closeDropdown();
   }
 document.getElementById('add-btn').addEventListener('click', function() {
-  document.getElementById('modalLabel').innerText = 'Tambah User';
+  document.getElementById('modalLabelUser').innerText = 'Tambah User';
   document.getElementById('form').reset();
   document.getElementById('id').value = '';
   document.getElementById('selected-role').innerText = 'Pilih User';
   });
 
-        //INI BAGIAN MENU ORANGTUA TAMBAH DATA ORANG TUA
-function selectOrangTua(id_orang_tua, nama) {
-  selectedOrangTua = orang_tua; // Simpan orang tua yang dipilih
-  document.getElementById('orang_tua').value = id_orang_tua;
-  document.getElementById('selected-orang_tua').innerText = nama;
-  closeDropdown();
-}
-document.getElementById('add-btn')?.addEventListener('click', function() {
-  document.getElementById('modalLabel').innerText = 'Tambah Data Orang Tua';
-  document.getElementById('form').reset();
-  document.getElementById('id').value = '';
-  document.getElementById('selected-orang_tua').innerText = 'Pilih Orang Tua';
-  });
-
-function selectGuru(id_user, nama) {
-  document.getElementById('guru').value = id_user;
-  document.getElementById('selected-guru').innerText = nama;
-  const dropdownGuru = document.getElementById('dropdown-guru');
-  dropdownGuru.classList.add('hidden');
-}
-document.getElementById('add-btn')?.addEventListener('click', function() {
-  document.getElementById('modalLabel').innerText = 'Tambah Data Guru';
-  document.getElementById('form').reset();
-  document.getElementById('id').value = '';
-  document.getElementById('selected-guru').innerText = 'Pilih Guru';
-  });
 
 // Fungsi untuk menutup dropdown
 function closeDropdown() {
