@@ -179,22 +179,23 @@
                     </div>
 
                     <!-- Role -->
-                    <div class="mb-4">
+                    <div class="mb-4" id="role-wrapper">
                         <label for="role" class="block mb-2 text-sm font-medium">Role</label>
-                        <!-- Input level (hidden) -->
                         <input type="hidden" name="role" id="role" value="">
 
-                        <!-- Tombol Pilih Level -->
+                        <!-- Tombol Dropdown (akan disembunyikan saat edit) -->
                         <button id="selected-role" data-dropdown-toggle="dropdown"
                             class="capitalize text-white mb-4 bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full p-3 h-12 flex items-center justify-between"
                             type="button">
-                            <span>Pilih Role</span>
+                            <span id="role-label">Pilih Role</span>
                             <svg class="w-2.5 h-2.5 ms-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
                                 fill="none" viewBox="0 0 10 6">
                                 <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
                                     stroke-width="2" d="m1 1 4 4 4-4" />
                             </svg>
                         </button>
+                        <!-- Teks Role (hanya tampil saat edit) -->
+                        <div id="role-text" class="capitalize text-gray-700 mb-4 font-medium hidden p-3 border rounded-lg bg-gray-100"></div>
                         <div id="dropdown"
                             class="z-10 hidden bg-white divide-y divide-gray-100 rounded-lg shadow-xl w-[850px] ">
                             <ul class="py-2 text-sm text-gray-700" aria-labelledby="dropdownDefaultButton">
@@ -262,8 +263,26 @@
         document.getElementById('password').required = false;
         document.getElementById('nama').value = nama;
         document.getElementById('role').value = role;
-        document.getElementById('selected-role').innerHTML = role;
         document.getElementById('alamat').value = alamat;
         document.getElementById('kontak').value = kontak;
+        // Sembunyikan tombol dropdown dan tampilkan teks
+        document.getElementById('selected-role').style.display = "none";
+        document.getElementById('dropdown').style.display = "none";
+        const roleText = document.getElementById('role-text');
+        roleText.innerText = role;
+        roleText.classList.remove('hidden');
+    }
+
+    function tambahUser() {
+        $("#modalLabelUser").html("Tambah User");
+        document.getElementById('form').reset();
+
+        // Tampilkan kembali dropdown dan sembunyikan teks role
+        document.getElementById('selected-role').style.display = "";
+        document.getElementById('dropdown').style.display = "";
+        const roleText = document.getElementById('role-text');
+        roleText.classList.add('hidden');
+        roleText.innerText = "";
+        document.getElementById('role-label').innerText = "Pilih Role";
     }
 </script>

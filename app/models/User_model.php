@@ -27,7 +27,7 @@ class User_model extends Model
         $hashed_password = password_hash($data['password'], PASSWORD_BCRYPT);
 
         $query = "INSERT INTO " . $this->table . " (username, email, password, nama, role, alamat, kontak, login_at) 
-              VALUES (:username, :email, :password, :nama, :role, :kontak, :kontak, :login_at)";
+        VALUES (:username, :email, :password, :nama, :role, :alamat, :kontak, :login_at)";
         $this->db->query($query);
         $this->db->bind(':username', $data['username']);
         $this->db->bind(':email', $data['email']);
@@ -39,6 +39,24 @@ class User_model extends Model
         $this->db->bind(':login_at', date('Y-m-d H:i:s'));
 
         $this->db->execute();
+
+        // Dapatkan ID user yang baru dibuat
+        $newUserId = $this->db->lastInsertId();
+
+        // Tambah ke tabel relasi berdasarkan role
+        if ($data['role'] === 'santri') {
+            $this->db->query("INSERT INTO santri (id_user) VALUES (:id_user)");
+            $this->db->bind(':id_user', $newUserId);
+            $this->db->execute();
+        } elseif ($data['role'] === 'orang tua') {
+            $this->db->query("INSERT INTO orang_tua (id_user) VALUES (:id_user)");
+            $this->db->bind(':id_user', $newUserId);
+            $this->db->execute();
+        } elseif ($data['role'] === 'guru') {
+            $this->db->query("INSERT INTO guru (id_user) VALUES (:id_user)");
+            $this->db->bind(':id_user', $newUserId);
+            $this->db->execute();
+        }
         return $this->db->rowCount();
     }
 
@@ -47,59 +65,26 @@ class User_model extends Model
         // Ambil data user lama
         $oldUser = $this->getUserById($data['id']);
         $oldRole = $oldUser['role'];
-        $newRole = $data['role'];
-
-        // Jika role berubah
-        if ($oldRole !== $newRole) {
-            // Hapus relasi lama
-            if ($oldRole === 'orang tua') {
-                $this->db->query("DELETE FROM orang_tua WHERE id_user = :id_user");
-                $this->db->bind('id_user', $data['id']);
-                $this->db->execute();
-            } elseif ($oldRole === 'santri') {
-                $this->db->query("DELETE FROM santri WHERE id_user = :id_user");
-                $this->db->bind('id_user', $data['id']);
-                $this->db->execute();
-            } elseif ($oldRole === 'guru') {
-                $this->db->query("DELETE FROM guru WHERE id_user = :id_user");
-                $this->db->bind('id_user', $data['id']);
-                $this->db->execute();
-            }
-
-            // Tambah relasi baru
-            if ($newRole === 'orang tua') {
-                $this->db->query("INSERT INTO orang_tua (id_user) VALUES (:id_user)");
-                $this->db->bind('id_user', $data['id']);
-                $this->db->execute();
-            } elseif ($newRole === 'santri') {
-                $this->db->query("INSERT INTO santri (id_user) VALUES (:id_user)");
-                $this->db->bind('id_user', $data['id']);
-                $this->db->execute();
-            } elseif ($newRole === 'guru') {
-                $this->db->query("INSERT INTO guru (id_user) VALUES (:id_user)");
-                $this->db->bind('id_user', $data['id']);
-                $this->db->execute();
-            }
-        }
+        // Tetapkan kembali role lama, abaikan inputan dari form
+        $data['role'] = $oldRole;
 
         // Update user
         if (!empty($data['password'])) {
             $hashedPassword = password_hash($data['password'], PASSWORD_DEFAULT);
             $query = "UPDATE " . $this->table . " 
-                  SET username = :username, email = :email, password = :password, nama = :nama, role = :role, alamat = :alamat, kontak = :kontak, login_at = :login_at
-                  WHERE id_user = :id_user";
+              SET username = :username, email = :email, password = :password, nama = :nama, alamat = :alamat, kontak = :kontak, login_at = :login_at
+              WHERE id_user = :id_user";
             $this->db->query($query);
             $this->db->bind('password', $hashedPassword);
         } else {
             $query = "UPDATE " . $this->table . " 
-                  SET username = :username, email = :email, nama = :nama, role = :role, alamat = :alamat, kontak = :kontak, login_at = :login_at
-                  WHERE id_user = :id_user";
+              SET username = :username, email = :email, nama = :nama, alamat = :alamat, kontak = :kontak, login_at = :login_at
+              WHERE id_user = :id_user";
             $this->db->query($query);
         }
         $this->db->bind('username', $data['username']);
         $this->db->bind('email', $data['email']);
         $this->db->bind('nama', $data['nama']);
-        $this->db->bind('role', $data['role']);
         $this->db->bind('alamat', $data['alamat']);
         $this->db->bind('kontak', $data['kontak']);
         $this->db->bind('id_user', $data['id']);
