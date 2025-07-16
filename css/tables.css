@@ -1,0 +1,49 @@
+/* Menjaga agar DataTables tidak mempengaruhi gaya tabel */
+table.dataTable {
+  width: 100% !important;
+  border-collapse: collapse !important;
+}
+
+table.dataTable th,
+table.dataTable td {
+  padding: 0.75rem !important;
+  text-align: left !important;
+}
+
+table.dataTable thead {
+  background-color: #1e3a8a !important; /* Sesuaikan dengan warna Tailwind */
+}
+
+table.dataTable thead th {
+  color: white !important;
+  font-weight: 600 !important;
+}
+
+table.dataTable tbody {
+  background-color: white !important;
+}
+
+table.dataTable tbody tr:hover {
+  background-color: #ebf8ff !important; /* Hover effect dari Tailwind */
+}
+
+table.dataTable tbody td {
+  color: #4a4a4a !important;
+}
+
+/* Pastikan DataTables tidak merusak border */
+table.dataTable thead th,
+table.dataTable tbody td {
+  border: 1px solid #d1d5db !important;
+}
+
+/* Styling untuk pagination */
+div.dataTables_wrapper .dataTables_paginate {
+  margin-top: 1rem;
+  text-align: center;
+}
+
+/* Menjaga agar halaman tetap mengikuti desain Tailwind */
+div.dataTables_wrapper {
+  padding: 1rem;
+}

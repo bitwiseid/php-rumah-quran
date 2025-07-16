@@ -1,25 +1,33 @@
 <?php
+session_status() === PHP_SESSION_NONE && session_start();
+class Flasher
+{
 
-class Flasher {
-
-    public static function setFlash ($pesan, $aksi, $tipe){
+    /**
+     * Membuat flash message yang akan ditampilkan di halaman
+     * 
+     * @param boolean $status status true jika berhasil, false jika gagal
+     * @param string $teks teks yang akan ditampilkan
+     * @return void
+     */
+    public static function setFlash($status, $teks)
+    {
         $_SESSION['flash'] = [
-            'pesan'=> $pesan,
-            'aksi'=> $aksi,
-            'tipe'=> $tipe
-
-
+            'title' => $status ? "Sukses" : "Gagal",
+            'teks' => $teks,
+            'tipe' => $status ? "success" : "error"
         ];
     }
 
-    public static function flash(){
-        if (isset($_SESSION['flash'])){
-            echo"
+    public static function flash()
+    {
+        if (isset($_SESSION['flash'])) {
+            echo "
             <script>
             Swal.fire({
-              title: '".$_SESSION['flash']['pesan']."',
-              text: '".$_SESSION['flash']['aksi']."',
-              icon: '".$_SESSION['flash']['tipe']."'
+              title: '" . $_SESSION['flash']['title'] . "',
+              text: '" . $_SESSION['flash']['teks'] . "',
+              icon: '" . $_SESSION['flash']['tipe'] . "'
             });
             </script>
             ";

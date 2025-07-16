@@ -20,7 +20,7 @@
 
     <!-- favicon -->
     <link rel="icon" type="image/png" href=<?= BASEURL . "/favicon/favicon-48x48.png" ?> sizes="48x48" />
-    <link rel="icon" type="image/svg+xml" href=<?= BASEURL . "/favicon/favicon.svg" ?> />
+    <link rel="icon" type="image/svg+xml" href=<?= BASEURL . "/favicon/logo.png" ?> />
     <link rel="shortcut icon" href=<?= BASEURL . "/favicon/favicon.ico" ?> />
     <link rel="apple-touch-icon" sizes="180x180" href=<?= BASEURL . "/favicon/apple-touch-icon.png" ?> />
     <meta name="apple-mobile-web-app-title" content="olshop" />
