@@ -21,6 +21,8 @@ $routes = [
         'santri/quran' => 'santri@createUpdateSantri',
         'santri/delete' => 'santri@deleteSantri',
         'target' => 'target@index',
+        'target/createUpdateTarget' => 'target@createUpdateTarget',
+        'target/deleteTarget' => 'target@deleteTarget',
     ]
 ];
 

@@ -97,4 +97,12 @@ class Santri_model extends Model
         $this->db->execute();
         return $this->db->rowCount();
     }
+
+    public function getSantriIdByUserId($id_user)
+    {
+        $this->db->query("SELECT id_santri FROM santri WHERE id_user = :id_user");
+        $this->db->bind('id_user', $id_user);
+        $result = $this->db->single();
+        return $result ? $result['id_santri'] : null;
+    }
 }
