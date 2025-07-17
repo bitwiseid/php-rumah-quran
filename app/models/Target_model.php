@@ -64,4 +64,31 @@ class Target_model extends Model
         $this->db->execute();
         return $this->db->rowCount();
     }
+
+    public function getTotalTarget()
+    {
+        $this->db->query("SELECT COUNT(*) AS total_target FROM target");
+        $result = $this->db->single();
+        return $result['total_target'] ?? 0;
+    }
+
+    public function getTargetAchievement()
+    {
+        $this->db->query("SELECT 
+            COUNT(CASE WHEN hafalan_total.total_ayat >= target.target_bulanan THEN 1 END) as tercapai,
+            COUNT(CASE WHEN hafalan_total.total_ayat < target.target_bulanan THEN 1 END) as belum_tercapai,
+            COUNT(*) as total_target
+            FROM target
+            LEFT JOIN (
+                SELECT 
+                    hafalan.id_santri,
+                    SUM(hafalan.jumlah_ayat) as total_ayat
+                FROM hafalan 
+                WHERE MONTH(hafalan.tanggal) = MONTH(CURDATE()) 
+                AND YEAR(hafalan.tanggal) = YEAR(CURDATE())
+                GROUP BY hafalan.id_santri
+            ) as hafalan_total ON target.id_santri = hafalan_total.id_santri
+            WHERE target.bulan = MONTH(CURDATE()) AND target.tahun = YEAR(CURDATE())");
+        return $this->db->single();
+    }
 }

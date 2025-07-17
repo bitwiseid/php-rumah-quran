@@ -131,4 +131,31 @@ class Hafalan_model extends Model
         $this->db->bind(':id_santri', $id_santri);
         return $this->db->resultSet();
     }
+
+    public function getTotalHafalan()
+    {
+        $this->db->query("SELECT COUNT(*) AS total_hafalan FROM hafalan");
+        $result = $this->db->single();
+        return $result['total_hafalan'] ?? 0;
+    }
+
+    public function getRecentHafalan($limit = 5)
+    {
+        $this->db->query("SELECT 
+            hafalan.id_hafalan,
+            hafalan.jumlah_ayat,
+            hafalan.tanggal,
+            hafalan.keterangan,
+            user_santri.nama AS nama_santri,
+            user_guru.nama AS nama_guru
+            FROM hafalan
+            JOIN santri ON hafalan.id_santri = santri.id_santri
+            JOIN user AS user_santri ON santri.id_user = user_santri.id_user
+            JOIN guru ON hafalan.id_guru = guru.id_guru
+            JOIN user AS user_guru ON guru.id_user = user_guru.id_user
+            ORDER BY hafalan.tanggal DESC
+            LIMIT :limit");
+        $this->db->bind(':limit', $limit);
+        return $this->db->resultSet();
+    }
 }
