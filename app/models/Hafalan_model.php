@@ -158,4 +158,37 @@ class Hafalan_model extends Model
         $this->db->bind(':limit', $limit);
         return $this->db->resultSet();
     }
+    
+    public function getLaporanHafalanSantri()
+    {
+        $this->db->query("SELECT 
+            santri.id_santri,
+            user_santri.nama AS nama_santri,
+            COUNT(hafalan.id_hafalan) AS total_pertemuan,
+            COALESCE(SUM(hafalan.jumlah_ayat), 0) AS total_hafalan_ayat,
+            COALESCE(SUM(hafalan.jumlah_ayat), 0) AS total_hafalan
+            FROM santri
+            JOIN user AS user_santri ON santri.id_user = user_santri.id_user
+            LEFT JOIN hafalan ON santri.id_santri = hafalan.id_santri
+            GROUP BY santri.id_santri, user_santri.nama
+            ORDER BY user_santri.nama ASC");
+        return $this->db->resultSet();
+    }
+    
+    public function getLaporanHafalanSantriById($id_santri)
+    {
+        $this->db->query("SELECT 
+            santri.id_santri,
+            user_santri.nama AS nama_santri,
+            COUNT(hafalan.id_hafalan) AS total_pertemuan,
+            COALESCE(SUM(hafalan.jumlah_ayat), 0) AS total_hafalan_ayat,
+            COALESCE(SUM(hafalan.jumlah_ayat), 0) AS total_hafalan
+            FROM santri
+            JOIN user AS user_santri ON santri.id_user = user_santri.id_user
+            LEFT JOIN hafalan ON santri.id_santri = hafalan.id_santri
+            WHERE santri.id_santri = :id_santri
+            GROUP BY santri.id_santri, user_santri.nama");
+        $this->db->bind(':id_santri', $id_santri);
+        return $this->db->single();
+    }
 }

@@ -16,6 +16,7 @@ $routes = [
         'hafalan/createUpdateHafalan' => 'hafalan@createUpdateHafalan',
         'hafalan/deleteHafalan' => 'hafalan@deleteHafalan',
         'laporan' => 'laporan@index',
+        'laporan/getPrintData' => 'laporan@getPrintData',
         'orang_tua' => 'orang_tua@index',
         'orang_tua/quran' => 'orang_tua@createUpdateOrangTua',
         'orang_tua/delete' => 'orang_tua@deleteOrangTua',
