@@ -105,4 +105,32 @@ class Santri_model extends Model
         $result = $this->db->single();
         return $result ? $result['id_santri'] : null;
     }
+
+    public function getSantriById($id_santri)
+    {
+        $this->db->query("SELECT 
+                        santri.id_santri,
+                        santri.id_orang_tua,
+                        user_santri.id_user,
+                        user_santri.nama AS nama_santri,
+                        user_santri.alamat,
+                        user_santri.role,
+                        user_santri.login_at,
+                        user_ortu.nama AS nama_ayah,
+                        user_ortu.nama AS nama_orang_tua
+                      FROM santri
+                      JOIN user AS user_santri ON santri.id_user = user_santri.id_user
+                      LEFT JOIN orang_tua ON santri.id_orang_tua = orang_tua.id_orang_tua
+                      LEFT JOIN user AS user_ortu ON orang_tua.id_user = user_ortu.id_user
+                      WHERE santri.id_santri = :id_santri");
+        $this->db->bind('id_santri', $id_santri);
+        $result = $this->db->single();
+        
+        // Debug untuk melihat hasil query
+        if (!$result) {
+            error_log("getSantriById: Santri dengan ID $id_santri tidak ditemukan");
+        }
+        
+        return $result;
+    }
 }
