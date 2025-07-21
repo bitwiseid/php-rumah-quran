@@ -85,19 +85,6 @@
                     </ul>
                 </li>
                 <li>
-                    <a href="<?= BASEURL_ADMIN ?>/hafalan"
-                        class="flex items-center p-2 text-blue-900 rounded-lg hover:bg-blue-900 group">
-                        <svg class="flex-shrink-0 w-5 h-5 transition duration-75 group-hover:text-white" aria-hidden="true"
-                            xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor"
-                            viewBox="0 0 24 24">
-                            <path stroke="currentColor" stroke-linecap="round" stroke-width="2"
-                                d="M9 8h10M9 12h10M9 16h10M4.99 8H5m-.02 4h.01m0 4H5" />
-                        </svg>
-                        <span
-                            class="flex-1 ms-3 whitespace-nowrap transition duration-75 group-hover:text-white">Hafalan</span>
-                    </a>
-                </li>
-                <li>
                     <a href="<?= BASEURL_ADMIN ?>/target"
                         class="flex items-center p-2 text-blue-900 rounded-lg  hover:bg-blue-900 group">
                         <svg class="flex-shrink-0 w-5 h-5 transition duration-75 group-hover:text-white" aria-hidden="true"
@@ -111,6 +98,23 @@
                             class="flex-1 ms-3 whitespace-nowrap transition duration-75 group-hover:text-white">Target</span>
                     </a>
                 </li>
+            <?php endif ?>
+            <?php if ($_SESSION['role'] == 'guru'): ?>
+                <li>
+                    <a href="<?= BASEURL_ADMIN ?>/hafalan"
+                        class="flex items-center p-2 text-blue-900 rounded-lg hover:bg-blue-900 group">
+                        <svg class="flex-shrink-0 w-5 h-5 transition duration-75 group-hover:text-white" aria-hidden="true"
+                            xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor"
+                            viewBox="0 0 24 24">
+                            <path stroke="currentColor" stroke-linecap="round" stroke-width="2"
+                                d="M9 8h10M9 12h10M9 16h10M4.99 8H5m-.02 4h.01m0 4H5" />
+                        </svg>
+                        <span
+                            class="flex-1 ms-3 whitespace-nowrap transition duration-75 group-hover:text-white">Hafalan</span>
+                    </a>
+                </li>
+            <?php endif ?>
+            <?php if ($_SESSION['role'] == 'admin'): ?>
                 <li>
                     <a href="<?= BASEURL_ADMIN ?>/laporan"
                         class="flex items-center p-2 text-blue-900 rounded-lg hover:bg-blue-900 group">

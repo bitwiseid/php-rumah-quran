@@ -47,51 +47,49 @@ if (form) {
   });
 }
 
-
 let selectedOrangTua = "";
-// Fungsi untuk memilih orang tua 
+// Fungsi untuk memilih orang tua
 function selectOrangTua(id_orang_tua, nama) {
-    const selectedOrangTuaEl = document.getElementById("selected-orang_tua");
-    const orangTuaInput = document.getElementById("orang_tua");
-    
-    if (selectedOrangTuaEl) {
-        selectedOrangTuaEl.innerText = nama || 'Pilih Orang Tua'; // Tampilkan nama atau default
-    }
-    
-    if (orangTuaInput) {
-        orangTuaInput.value = id_orang_tua || ''; // Set nilai hidden input
-    }
-    
-    closeDropdown(); // Tutup dropdown (jika ada fungsi closeDropdown)
+  const selectedOrangTuaEl = document.getElementById("selected-orang_tua");
+  const orangTuaInput = document.getElementById("orang_tua");
+
+  if (selectedOrangTuaEl) {
+    selectedOrangTuaEl.innerText = nama || "Pilih Orang Tua"; // Tampilkan nama atau default
+  }
+
+  if (orangTuaInput) {
+    orangTuaInput.value = id_orang_tua || ""; // Set nilai hidden input
+  }
+
+  closeDropdown(); // Tutup dropdown (jika ada fungsi closeDropdown)
 }
 //SAMPAI SINI BAGIAN TAMBAH SANTRI
 
 //INI BAGIAN MENU USER TAMBAH SANTRI
 function selectRole(element, role) {
-  const roleInput = document.getElementById('role');
-  const selectedRole = document.getElementById('selected-role');
-  
+  const roleInput = document.getElementById("role");
+  const selectedRole = document.getElementById("selected-role");
+
   if (roleInput) {
-    roleInput.value = element.getAttribute('id');
+    roleInput.value = element.getAttribute("id");
   }
-  
+
   if (selectedRole) {
     selectedRole.innerHTML = role;
   }
-  
+
   closeDropdown();
 }
 // Cek keberadaan elemen sebelum menambahkan event listener
-const addBtn = document.getElementById('add-btn');
+const addBtn = document.getElementById("add-btn");
 if (addBtn) {
-  addBtn.addEventListener('click', function() {
-    document.getElementById('modalLabelUser').innerText = 'Tambah User';
-    document.getElementById('form').reset();
-    document.getElementById('id').value = '';
-    document.getElementById('selected-role').innerText = 'Pilih User';
+  addBtn.addEventListener("click", function () {
+    document.getElementById("modalLabelUser").innerText = "Tambah User";
+    document.getElementById("form").reset();
+    document.getElementById("id").value = "";
+    document.getElementById("selected-role").innerText = "Pilih User";
   });
 }
-
 
 // Fungsi untuk menutup dropdown
 function closeDropdown() {
@@ -102,12 +100,14 @@ function closeDropdown() {
 }
 
 // Menampilkan dropdown saat tombol diklik
-const dropdownBtn = document.getElementById("dropdownDefaultButton");
-if (dropdownBtn) {
-  dropdownBtn.addEventListener("click", function () {
-    const dropdown = document.getElementById("dropdown");
-    if (dropdown) {
-      dropdown.classList.toggle("hidden");
-    }
-  });
-}
+document.addEventListener("DOMContentLoaded", function () {
+  const dropdownBtn = document.getElementById("dropdownDefaultButton");
+  if (dropdownBtn) {
+    dropdownBtn.addEventListener("click", function () {
+      const dropdown = document.getElementById("dropdown");
+      if (dropdown) {
+        dropdown.classList.toggle("hidden");
+      }
+    });
+  }
+});

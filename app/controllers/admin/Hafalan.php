@@ -31,6 +31,21 @@ class Hafalan extends Controller
         $data['santri'] = $this->model('Santri_model')->getSantri();
         $data['guru'] = $this->model('Guru_model')->getGuru();
         $data['id_santri_filter'] = $id_santri;
+        
+        // Cek jika user adalah guru, ambil data guru berdasarkan id_user
+        $data['is_guru'] = false;
+        $data['guru_login'] = null;
+        if (isset($_SESSION['role']) && $_SESSION['role'] === 'guru') {
+            $data['is_guru'] = true;
+            $user = $this->model('User_model')->getUserByUsername($_SESSION['username']);
+            if ($user) {
+                $guru = $this->model('Guru_model')->getGuruByUserId($user['id_user']);
+                if ($guru) {
+                    $data['guru_login'] = $guru;
+                }
+            }
+        }
+        
         $header['title'] = 'Hafalan';
         $this->view('templates/admin_header', $header);
         $this->view('templates/admin_navbar');
@@ -56,6 +71,18 @@ class Hafalan extends Controller
                 'id_guru' => $_POST['id_guru'],
                 'keterangan' => $keterangan
             ];
+            
+            // Verifikasi jika user adalah guru, pastikan id_guru yang digunakan adalah id_guru dari guru yang login
+            if (isset($_SESSION['role']) && $_SESSION['role'] === 'guru') {
+                $user = $this->model('User_model')->getUserByUsername($_SESSION['username']);
+                if ($user) {
+                    $guru = $this->model('Guru_model')->getGuruByUserId($user['id_user']);
+                    if ($guru) {
+                        // Override id_guru dengan id_guru dari guru yang login
+                        $data['id_guru'] = $guru['id_guru'];
+                    }
+                }
+            }
 
             if (isset($_POST['id_hafalan']) && !empty($_POST['id_hafalan'])) {
                 // Update

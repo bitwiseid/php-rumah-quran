@@ -63,4 +63,11 @@ class Guru_model extends Model
         $this->db->execute();
         return $this->db->rowCount();
     }
+    
+    public function getGuruByUserId($id_user)
+    {
+        $this->db->query("SELECT * FROM guru WHERE id_user = :id_user");
+        $this->db->bind('id_user', $id_user);
+        return $this->db->single();
+    }
 }

@@ -446,13 +446,28 @@
                     <!-- Guru -->
                     <div class="mb-4">
                         <label for="id_guru" class="block mb-2 text-sm font-medium">Guru</label>
-                        <select id="id_guru" name="id_guru" required
-                            class="bg-gray-50 border rounded-lg w-full p-3 focus:ring-blue-500 focus:border-blue-500">
-                            <option value="">Pilih Guru</option>
-                            <?php foreach ($data['guru'] as $guru): ?>
-                                <option value="<?= $guru['id_guru']; ?>"><?= $guru['nama_guru']; ?></option>
-                            <?php endforeach; ?>
-                        </select>
+                        <?php if ($data['is_guru'] && $data['guru_login']): ?>
+                            <?php 
+                            // Cari nama guru dari array guru
+                            $nama_guru = '';
+                            foreach ($data['guru'] as $guru) {
+                                if ($guru['id_guru'] == $data['guru_login']['id_guru']) {
+                                    $nama_guru = $guru['nama_guru'];
+                                    break;
+                                }
+                            }
+                            ?>
+                            <input type="text" value="<?= $nama_guru ?>" class="bg-gray-100 border rounded-lg w-full p-3" readonly>
+                            <input type="hidden" id="id_guru" name="id_guru" value="<?= $data['guru_login']['id_guru']; ?>">
+                        <?php else: ?>
+                            <select id="id_guru" name="id_guru" required
+                                class="bg-gray-50 border rounded-lg w-full p-3 focus:ring-blue-500 focus:border-blue-500">
+                                <option value="">Pilih Guru</option>
+                                <?php foreach ($data['guru'] as $guru): ?>
+                                    <option value="<?= $guru['id_guru']; ?>"><?= $guru['nama_guru']; ?></option>
+                                <?php endforeach; ?>
+                            </select>
+                        <?php endif; ?>
                     </div>
 
                     <!-- Jumlah Ayat -->
