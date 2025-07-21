@@ -35,9 +35,10 @@ class AdminApp
         if (!isset($_SESSION['role']) && $this->controller !== "login") {
             $this->controller = 'login';
             $this->method = 'index';
-        } else if (isset($_SESSION['role']) && ($_SESSION['role'] !== "admin" && $_SESSION['role'] !== "superadmin") && $this->controller === "login") {
-            $this->controller = 'dashboard';
-            $this->method = 'index';
+        } else if (isset($_SESSION['role']) && $_SESSION['role'] === "orang tua" && $this->controller === "dashboard") {
+            // Redirect orang tua to monitoring page by default
+            $this->controller = 'orang_tua';
+            $this->method = 'monitoring';
         }
 
 

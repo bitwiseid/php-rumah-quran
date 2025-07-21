@@ -2,6 +2,13 @@
 class Orang_tua_model extends Model
 {
     protected $table = 'orang_tua';
+    
+    public function getOrangTuaByUserId($id_user)
+    {
+        $this->db->query('SELECT * FROM ' . $this->table . ' WHERE id_user = :id_user');
+        $this->db->bind('id_user', $id_user);
+        return $this->db->single();
+    }
     public function getOrangTuaById($id_orang_tua)
     {
         $this->db->query('SELECT * FROM ' . $this->table . ' WHERE id_orang_tua = :id_orang_tua');

@@ -30,24 +30,25 @@
                             <img class="w-8 h-8 rounded-full" src="<?= BASEURL ?>/favicon/user.png" alt="user photo">
                         </button>
                     </div>
-                    <div class="z-50 hidden my-4 text-base list-none bg-white divide-y divide-gray-100 rounded shadow-xl"
+                    <div class="z-50 hidden my-4 text-base list-none bg-white divide-y divide-gray-100 rounded shadow-xl px-6"
                         id="dropdown-user">
-                        <div class="px-4 py-3" role="none">
+                        <div class="px-4 py-2 text-center" role="none">
                             <!-- Tampilkan Username dan Email dari Session -->
-                            <p class="text-sm text-gray-900 mb-2" role="none">
-
+                            <p class="text-sm text-gray-900 mb-2 uppercase" role="none">
+                                <?= $_SESSION['username']; ?>
                             </p>
-                            <p class="text-sm text-gray-900" role="none">
-
+                            <p class="text-sm text-gray-500 " role="none">
+                                <?= $_SESSION['role']; ?>
                             </p>
                         </div>
                         <ul class="py-1" role="none">
-                            <li>
+                            <!-- <li>
                                 <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-200"
                                     role="menuitem">Reset Password</a>
-                            </li>
+                            </li> -->
                             <li>
-                                <a href=<?= BASEURL_ADMIN . '/logout' ?> class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-200"
+                                <a href=<?= BASEURL_ADMIN . '/logout' ?>
+                                    class="block px-4 py-2 text-sm text-center text-red-900 font-bold hover:bg-gray-200"
                                     role="menuitem">Logout</a>
                             </li>
                         </ul>
