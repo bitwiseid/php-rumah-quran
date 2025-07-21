@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Waktu pembuatan: 17 Jul 2025 pada 02.39
+-- Waktu pembuatan: 21 Jul 2025 pada 12.15
 -- Versi server: 10.4.28-MariaDB
 -- Versi PHP: 8.1.17
 
@@ -32,6 +32,13 @@ CREATE TABLE `guru` (
   `id_user` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Dumping data untuk tabel `guru`
+--
+
+INSERT INTO `guru` (`id_guru`, `id_user`) VALUES
+(7, 29);
+
 -- --------------------------------------------------------
 
 --
@@ -47,6 +54,16 @@ CREATE TABLE `hafalan` (
   `keterangan` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Dumping data untuk tabel `hafalan`
+--
+
+INSERT INTO `hafalan` (`id_hafalan`, `id_santri`, `jumlah_ayat`, `tanggal`, `id_guru`, `keterangan`) VALUES
+(5, 31, 92, '2025-07-17', 7, 'Voluptatem Et voluptas accusantium est dolor debitis cumque quis neque quas ea quam magni incidunt do aut cupidatat'),
+(6, 31, 20, '2025-07-10', 7, ''),
+(7, 32, 1, '2025-07-16', 7, 'Lancar'),
+(8, 31, 1, '2025-07-21', 7, 'lancar');
+
 -- --------------------------------------------------------
 
 --
@@ -57,6 +74,14 @@ CREATE TABLE `orang_tua` (
   `id_orang_tua` int(11) NOT NULL,
   `id_user` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data untuk tabel `orang_tua`
+--
+
+INSERT INTO `orang_tua` (`id_orang_tua`, `id_user`) VALUES
+(15, 33),
+(16, 36);
 
 -- --------------------------------------------------------
 
@@ -85,6 +110,14 @@ CREATE TABLE `santri` (
   `id_orang_tua` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Dumping data untuk tabel `santri`
+--
+
+INSERT INTO `santri` (`id_santri`, `id_user`, `id_orang_tua`) VALUES
+(31, 34, 15),
+(32, 35, 15);
+
 -- --------------------------------------------------------
 
 --
@@ -98,6 +131,14 @@ CREATE TABLE `target` (
   `bulan` tinyint(4) NOT NULL,
   `tahun` year(4) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data untuk tabel `target`
+--
+
+INSERT INTO `target` (`id_target`, `id_santri`, `target_bulanan`, `bulan`, `tahun`) VALUES
+(2, 31, 12, 7, '2025'),
+(3, 32, 12, 7, '2025');
 
 -- --------------------------------------------------------
 
@@ -116,6 +157,18 @@ CREATE TABLE `user` (
   `kontak` varchar(20) NOT NULL,
   `login_at` datetime NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data untuk tabel `user`
+--
+
+INSERT INTO `user` (`id_user`, `username`, `password`, `email`, `role`, `nama`, `alamat`, `kontak`, `login_at`) VALUES
+(3, 'admin321', '$2y$10$12JYlOCj6pf.WYW2.bY/0uS1x9PkMmY8k/oQvMM3SN.2S9lBMLzJy', 'admin321@gmail.com', 'admin', 'Admin', 'Maros', '08123456789', '2025-07-05 04:44:41'),
+(29, 'test', '$2y$10$W.94kGauCyX6WlmOksJrvuKyRtNG9q.mSUfs0diiexn.nqfiiJ7hy', 'jalukagaze@mailinator.com', 'guru', 'test', 'Facilis exercitation', 'Porro sit et alias e', '2025-07-21 11:50:22'),
+(33, 'sahum', '$2y$10$/TLOx1PYjK39wRPge4c4UOF4CX9EiWBlF2ocRh.mVmK2X.IzD6Sma', 'nabu@mailinator.com', 'orang tua', 'sahum ortu', 'Ut ut qui sunt minim', 'Quibusdam laboris fu', '2025-07-21 04:34:03'),
+(34, 'santri1', '$2y$10$756doMewMmipgcig/fyr4.qN876skTEauMKCrWNq5U/eNpme0aGLy', 'santri1@email.com', 'santri', 'santri1', 'a', 'a', '2025-07-17 00:29:42'),
+(35, 'santri2', '$2y$10$7f.FEQG5TXopeFQggL480O1onX5NKYGxv2Kb.yRjY255i6HA4kcmW', 'kakuquka@mailinator.com', 'santri', 'Santri2 ', 'Facilis quas animi ', 'Totam vel Nam in vol', '2025-07-17 01:56:59'),
+(36, 'lexepoz', '$2y$10$o/ocAqns6GGSpIsnpVQy8evPfgLa80XwTCqqqZx6PZYOQSBRqV3kS', 'bezenopyle@mailinator.com', 'orang tua', 'Quidem vero ex disti', 'Irure dolore placeat', 'Reprehenderit est co', '2025-07-21 04:34:51');
 
 --
 -- Indexes for dumped tables
@@ -160,8 +213,7 @@ ALTER TABLE `santri`
 -- Indeks untuk tabel `target`
 --
 ALTER TABLE `target`
-  ADD PRIMARY KEY (`id_target`),
-  ADD UNIQUE KEY `id_santri` (`id_santri`);
+  ADD PRIMARY KEY (`id_target`);
 
 --
 -- Indeks untuk tabel `user`
@@ -177,19 +229,19 @@ ALTER TABLE `user`
 -- AUTO_INCREMENT untuk tabel `guru`
 --
 ALTER TABLE `guru`
-  MODIFY `id_guru` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_guru` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT untuk tabel `hafalan`
 --
 ALTER TABLE `hafalan`
-  MODIFY `id_hafalan` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_hafalan` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT untuk tabel `orang_tua`
 --
 ALTER TABLE `orang_tua`
-  MODIFY `id_orang_tua` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_orang_tua` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 
 --
 -- AUTO_INCREMENT untuk tabel `progres`
@@ -201,19 +253,19 @@ ALTER TABLE `progres`
 -- AUTO_INCREMENT untuk tabel `santri`
 --
 ALTER TABLE `santri`
-  MODIFY `id_santri` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_santri` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=33;
 
 --
 -- AUTO_INCREMENT untuk tabel `target`
 --
 ALTER TABLE `target`
-  MODIFY `id_target` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_target` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT untuk tabel `user`
 --
 ALTER TABLE `user`
-  MODIFY `id_user` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_user` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=37;
 
 --
 -- Ketidakleluasaan untuk tabel pelimpahan (Dumped Tables)
