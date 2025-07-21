@@ -133,4 +133,16 @@ class Santri_model extends Model
         
         return $result;
     }
+    
+    public function getSantriByOrangTuaId($id_orang_tua)
+    {
+        $this->db->query("SELECT 
+                        santri.id_santri,
+                        user_santri.nama AS nama_santri
+                      FROM santri
+                      JOIN user AS user_santri ON santri.id_user = user_santri.id_user
+                      WHERE santri.id_orang_tua = :id_orang_tua");
+        $this->db->bind('id_orang_tua', $id_orang_tua);
+        return $this->db->resultSet();
+    }
 }

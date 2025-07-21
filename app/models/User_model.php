@@ -21,6 +21,14 @@ class User_model extends Model
         $this->db->bind('email', $email);
         return $this->db->single();
     }
+    
+    public function getUserByUsername($username)
+    {
+        $query = "SELECT * FROM " . $this->table . " WHERE username = :username";
+        $this->db->query($query);
+        $this->db->bind('username', $username);
+        return $this->db->single();
+    }
 
     public function createUser($data)
     {
