@@ -1,11 +1,12 @@
 <div class="flex justify-center items-center h-full min-h-screen p-4 bg-cover bg-center"
     style="background-image: url('<?= BASEURL ?>/favicon/islamic.png');">
     <div class="max-w-md w-full mx-auto">
-        <form action="<?= BASEURL_ADMIN ?>/login/autentikasi" method="POST" class="bg-opacity-80 bg-white rounded-2xl p-6 shadow-2xl">
-
+        <img class="h-44 mt-4 rounded-full" src="<?= BASEURL ?>/favicon/logo2.png" alt="Logo">
+        <form action="<?= BASEURL_ADMIN ?>/login/autentikasi" method="POST"
+            class="bg-opacity-80 bg-white rounded-2xl p-6 shadow-2xl relative">
             <div class="text-center">
                 <h3 class="text-blue-900 text-3xl font-extrabold">Login</h3>
-                <img class="h-44 mx-auto mt-4" src="<?= BASEURL ?>/favicon/logo.png" alt="Logo">
+                <img class="h-44 mx-auto mt-4 rounded-2xl" src="<?= BASEURL ?>/favicon/logo.png" alt="Logo">
             </div>
 
             <div class="mt-6">
